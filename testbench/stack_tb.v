@@ -21,6 +21,7 @@ module stack_tb;
 
     initial begin
         $monitor("push: %b | pop: %b | reset: %b | data_out: %b | empty: %b", push, pop, reset, data_out, empty);
+        clk = 0;
         reset = 0;
         push = 0;
         pop = 0;

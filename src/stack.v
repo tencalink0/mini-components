@@ -15,24 +15,22 @@ module stack (
     
     always @(posedge clk or posedge reset) begin
         if (reset) begin
-            $display("Here1");
             sp <= 3'b000;
             empty <= 1'b1;
             data_out <= 8'b0; // Clear data_out on reset
         end
         else begin
-            $display("Here3");
             if (push && sp < 8) begin
-                $display("Here push");
                 stack_mem[sp] <= data_in;
-                sp <= sp + 1;
+                sp = sp + 1; // blocking assignment to update sp
                 empty <= 1'b0;
+                $display("Here push %b, %b", stack_mem[0], sp);
             end
             if (pop && sp > 0) begin
-                $display("Here pop");
-                sp <= sp - 1;
+                sp = sp - 1;
                 data_out <= stack_mem[sp];
                 if (sp == 1) empty <= 1'b1;
+                $display("Here pop %b, %b", stack_mem[0], sp);
             end else if (sp == 0) begin
                 empty <= 1'b1;
             end
