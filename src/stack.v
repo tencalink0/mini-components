@@ -11,7 +11,7 @@ module stack (
     output reg empty
 );
     reg [7:0] stack_mem [7:0];
-    reg [2:0] sp; // stack pointer
+    reg [3:0] sp; // stack pointer
     
     always @(posedge clk or posedge reset) begin
         if (reset) begin
